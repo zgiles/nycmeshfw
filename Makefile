@@ -21,29 +21,44 @@
 #	Agustí Moll
 #	Roger Pueyo Centelles
 
+# Repos
+QMP_QMP_URL ?= https://dev.qmp.cat/qmp.git
+QMP_QMP_BRANCH ?= 4.0
+
+LEDE_SOURCE_URL ?= https://git.lede-project.org/source.git
+LEDE_SOURCE_BRANCH ?= master
+
+LEDE_PACKAGES_URL ?= https://git.lede-project.org/feed/packages.git
+LEDE_PACKAGES_BRANCH ?= master
+
+NYCMESH_FEED_URL ?= file:////home/zrg/nycmesh/nycmeshfeed
+NYCMESH_FEED_BRANCH ?= lede
+
+##########
+NOW=$(shell date +%Y%m%d%H%M)
 # Base distribution sources clone URLs
-LEDE_SOURCE_CLONE = git clone -b lede-17.01 http://git.lede-project.org/source.git
-LEDE_PKG_CLONE = git clone -b lede-17.01 https://git.lede-project.org/feed/packages.git
+LEDE_SOURCE_CLONE = git clone -b $(LEDE_SOURCE_BRANCH) $(LEDE_SOURCE_URL)
+LEDE_PKG_CLONE = git clone -b $(LEDE_PACKAGE_BRANCH) $(LEDE_PACKAGE_URL)
 
 # qMp packages source clone URLs and settings
-QMP_GIT_RW = ssh://gitolite@dev.qmp.cat:qmp.git
-QMP_GIT_RO = http://dev.qmp.cat/qmp.git
-QMP_GIT_BRANCH ?= 4.0
+QMP_GIT_RO = $(QMP_QMP_URL)
+QMP_GIT_RW ?= $(QMP_QMP_URL)
+QMP_GIT_BRANCH ?= $(QMP_QMP_BRANCH)
 QMP_FEED = package/feeds/qmp_packages
 
 # Distribution naming
-VERSION_DIST ?= qMp
-VERSION_MANUFACTURER ?= "Quick Mesh Project"
-VERSION_MANUFACTURER_URL ?= https://www.qmp.cat
-VERSION_BUG_URL ?= https://dev.qmp.cat/projects/qmp/issues
-VERSION_SUPPORT_URL ?= https://dev.qmp.cat/projects/qmp/wiki
+VERSION_DIST ?= nycmeshfirmware-lede
+VERSION_MANUFACTURER ?= "NYC Mesh"
+VERSION_MANUFACTURER_URL ?= https://www.nycmesh.net
+VERSION_BUG_URL ?= https://github.com/zgiles/qmpfw/issues
+VERSION_SUPPORT_URL ?= https://www.nycmesh.net
 
 # Distribution versioning (e.g. Ratafia 2.0, Clearance testing, Kalimotxo trunk)
-VERSION_NICK ?= Macondo
-VERSION_NUMBER ?= 4.0-rc1
+VERSION_NICK ?= Macaroni
+VERSION_NUMBER ?= $(QMP_QMP_BRANCH)-$(LEDE_SOURCE_BRANCH)-$(NOW)
 
 # Distribution repository
-VERSION_REPO="http://fw.qmp.cat/Releases/%v"
+VERSION_REPO="https://www.nycmesh.net/fw/%v"
 
 # Image customization
 IMAGEOPT ?= true
@@ -115,6 +130,7 @@ define copy_feeds_file
 	$(if $(FEEDS_DIR),,$(call target_error))
 	cp -f $(BUILD_DIR)/$(FEEDS_DIR)/feeds.conf.default $(BUILD_DIR)/$(FEEDS_DIR)/feeds.conf
 	cat $(BUILD_DIR)/qmp/feeds.conf >> $(BUILD_DIR)/$(FEEDS_DIR)/feeds.conf
+	cat feeds.conf >> $(BUILD_DIR)/$(FEEDS_DIR)/feeds.conf
 	sed -i -e "s|PATH|`pwd`/$(BUILD_DIR)|" $(BUILD_DIR)/$(FEEDS_DIR)/feeds.conf
 endef
 
