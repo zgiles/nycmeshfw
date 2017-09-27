@@ -1,7 +1,6 @@
 machine:
   environment:
     TARGET: "nsm5-xw"
-    BRANCH: "nycmesh-4.0"
 
 dependencies:
   pre:
@@ -13,3 +12,10 @@ dependencies:
 test:
   override:
     - ./build.sh | tee stdout
+    - mv images/* $CIRCLE_ARTIFACTS/
+    - mv stdout $CIRCLE_ARTIFACTS/
+
+general:
+  branches:
+    only:
+      - nycmesh-4.0
