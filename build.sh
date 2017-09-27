@@ -1,5 +1,9 @@
 #!/bin/bash
 set +x
+
+# Because ./configure will sometimes check for root. tar is a good example
+export FORCE_UNSAFE_CONFIGURE=1
+
 echo CPUS: $CPUS
 echo DEBUG: $DEBUG
 echo TARGET: $TARGET
@@ -14,10 +18,12 @@ then
 fi
 if [ "$CPUS" == "" ]
 then
-	echo CPUS field empty, choosingg $(nproc)
+	echo CPUS field empty, choosing $(nproc)
 	export CPUS=$(nproc)
 fi
 echo CPUS: $CPUS
 echo DEBUG: $DEBUG
 echo TARGET: $TARGET
 make $DEBUG J=$CPUS T=$TARGET
+echo Done building
+mv build/lede/bin images/

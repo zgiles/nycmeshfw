@@ -47,7 +47,7 @@ QMP_GIT_BRANCH ?= $(QMP_QMP_BRANCH)
 QMP_FEED = package/feeds/qmp_packages
 
 # Distribution naming
-VERSION_DIST ?= nycmeshfirmware-lede
+VERSION_DIST ?= nycmeshfirmware
 VERSION_MANUFACTURER ?= "NYC Mesh"
 VERSION_MANUFACTURER_URL ?= https://www.nycmesh.net
 VERSION_BUG_URL ?= https://github.com/zgiles/qmpfw/issues
@@ -55,7 +55,7 @@ VERSION_SUPPORT_URL ?= https://www.nycmesh.net
 
 # Distribution versioning (e.g. Ratafia 2.0, Clearance testing, Kalimotxo trunk)
 VERSION_NICK ?= Macaroni
-VERSION_NUMBER ?= $(QMP_QMP_BRANCH)-$(LEDE_SOURCE_BRANCH)-$(NOW)
+VERSION_NUMBER ?= qmp$(QMP_QMP_BRANCH)-lede$(LEDE_SOURCE_BRANCH)-$(NOW)
 
 # Distribution repository
 VERSION_REPO="https://www.nycmesh.net/fw/%v"
@@ -244,6 +244,7 @@ define post_build_target
 	-@[ -f $(BUILD_PATH)/$(SQUASHIMAGE_PATH) ] && cp -f $(BUILD_PATH)/$(SQUASHIMAGE_PATH) $(IMAGES)/$(SQUASHIMAGE_NAME)
 	-@[ -f $(BUILD_PATH)/$(SYSUPGRADE_PATH) ] && cp -f $(BUILD_PATH)/$(SYSUPGRADE_PATH) $(IMAGES)/$(SYSUPGRADE_NAME)
 	@[ -f $(IMAGES)/$(EXT4IMAGE_NAME) -o -f $(IMAGES)/$(FACTORY_NAME) -o -f $(IMAGES)/$(SQUASHIMAGE_NAME) -o -f $(IMAGES)/$(SYSUPGRADE_NAME) ] || echo No output image configured in targets.mk
+	cd $(IMAGES) && sha256sum * > sha256sums
 
 	@echo "Generated images:"
 	$(if $(EXT4IMAGE),@echo $(EXT4IMAGE_NAME))
