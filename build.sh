@@ -17,7 +17,6 @@ then
 	echo CPUS field empty, choosingg $(nproc)
 	export CPUS=$(nproc)
 fi
-if 
 echo CPUS: $CPUS
 echo DEBUG: $DEBUG
 echo TARGET: $TARGET
