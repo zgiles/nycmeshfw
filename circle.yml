@@ -11,7 +11,8 @@ dependencies:
 
 test:
   override:
-    - ./build.sh | tee stdout
+    - ./build.sh | tee stdout:
+      timeout: 6000
     - mv images/* $CIRCLE_ARTIFACTS/
     - mv stdout $CIRCLE_ARTIFACTS/
 
