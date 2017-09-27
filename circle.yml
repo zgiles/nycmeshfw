@@ -1,0 +1,15 @@
+machine:
+  environment:
+    TARGET: "nsm5-xw"
+    BRANCH: "nycmesh-4.0"
+
+dependencies:
+  pre:
+    - sudo add-apt-repository -y ppa:git-core/ppa
+    - sudo apt-get update
+    - sudo apt-get install make gcc g++ zlib1g-dev libssl-dev wget subversion file python apt-utils binfmt-support vim apt-file xz-utils subversion zlib1g-dev gawk flex unzip bzip2 gettext build-essential libncurses5-dev libncursesw5-dev libssl-dev binutils cpp psmisc docbook-to-man gcc-multilib g++-multilib
+    - sudo apt-get install git
+
+test:
+  override:
+    - ./build.sh
