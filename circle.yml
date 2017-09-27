@@ -12,4 +12,4 @@ dependencies:
 
 test:
   override:
-    - ./build.sh
+    - ./build.sh | tee stdout
