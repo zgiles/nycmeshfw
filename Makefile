@@ -38,7 +38,7 @@ NYCMESH_FEED_BRANCH ?= lede
 NOW=$(shell date +%Y%m%d%H%M)
 # Base distribution sources clone URLs
 LEDE_SOURCE_CLONE = git clone -b $(LEDE_SOURCE_BRANCH) $(LEDE_SOURCE_URL)
-LEDE_PKG_CLONE = git clone -b $(LEDE_PACKAGE_BRANCH) $(LEDE_PACKAGE_URL)
+LEDE_PKG_CLONE = git clone -b $(LEDE_PACKAGES_BRANCH) $(LEDE_PACKAGES_URL)
 
 # qMp packages source clone URLs and settings
 QMP_GIT_RO = $(QMP_QMP_URL)
