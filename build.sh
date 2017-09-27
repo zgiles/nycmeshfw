@@ -1,5 +1,8 @@
 #!/bin/bash
 set +x
+echo CPUS: $CPUS
+echo DEBUG: $DEBUG
+echo TARGET: $TARGET
 if [ "$AWS_REGION" != "" ]
 then
 	echo Running on AWS...
@@ -14,4 +17,8 @@ then
 	echo CPUS field empty, choosingg $(nproc)
 	export CPUS=$(nproc)
 fi
-make J=$CPUS T=$TARGET
+if 
+echo CPUS: $CPUS
+echo DEBUG: $DEBUG
+echo TARGET: $TARGET
+make $DEBUG J=$CPUS T=$TARGET
