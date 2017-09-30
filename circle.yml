@@ -10,10 +10,11 @@ dependencies:
     - sudo apt-get install git
 
 test:
-  - ./build.sh | tee stdout:
-        timeout: 6000
-  - mv images/* $CIRCLE_ARTIFACTS/
-  - mv stdout $CIRCLE_ARTIFACTS/
+  override:
+    - ./build.sh | tee stdout:
+          timeout: 6000
+    - mv images/* $CIRCLE_ARTIFACTS/
+    - mv stdout $CIRCLE_ARTIFACTS/
 
 general:
   branches:
