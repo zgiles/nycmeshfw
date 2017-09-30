@@ -8,8 +8,8 @@ before_install:
   - sudo apt-get -y install make gcc g++ zlib1g-dev libssl-dev wget subversion file python apt-utils binfmt-support vim apt-file xz-utils subversion zlib1g-dev gawk flex unzip bzip2 gettext build-essential libncurses5-dev libncursesw5-dev libssl-dev binutils cpp psmisc docbook-to-man gcc-multilib g++-multilib
   - sudo apt-get -y install git
 env:
-  - FORCE_UNSAFE_CONFIGURE=1
-  - CPUS=2
-  - TARGET=nsm5-xw
+  global:
+    - FORCE_UNSAFE_CONFIGURE=1
+    - CPUS=2
 script:
-  - ./build.sh
+  - travis_wait 30 ./build.sh
