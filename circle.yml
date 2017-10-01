@@ -1,6 +1,7 @@
 machine:
   environment:
     TARGET: "nsm5-xw"
+    DEBUG: "V=s"
 
 dependencies:
   pre:
@@ -11,11 +12,16 @@ dependencies:
 
 test:
   override:
-    - ./build.sh checkout
-    - ./build.sh sync_config
-    - ./build.sh pre_build
-    - ./build.sh compile
-    - ./build.sh post_build
+    - ./build.sh checkout:
+          timeout: 6000
+    - ./build.sh sync_config:
+          timeout: 6000
+    - ./build.sh pre_build:
+          timeout: 6000
+    - ./build.sh compile:
+          timeout: 6000
+    - ./build.sh post_build:
+          timeout: 6000
     - mv build/lede/bin images/
     - mv images/* $CIRCLE_ARTIFACTS/
     - mv stdout $CIRCLE_ARTIFACTS/
