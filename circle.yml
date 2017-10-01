@@ -11,8 +11,12 @@ dependencies:
 
 test:
   override:
-    - ./build.sh | tee stdout:
-          timeout: 6000
+    - ./build.sh checkout
+    - ./build.sh sync_config
+    - ./build.sh pre_build
+    - ./build.sh compile
+    - ./build.sh post_build
+    - mv build/lede/bin images/
     - mv images/* $CIRCLE_ARTIFACTS/
     - mv stdout $CIRCLE_ARTIFACTS/
 

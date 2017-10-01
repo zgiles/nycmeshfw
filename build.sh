@@ -24,6 +24,7 @@ fi
 echo CPUS: $CPUS
 echo DEBUG: $DEBUG
 echo TARGET: $TARGET
-make $DEBUG J=$CPUS T=$TARGET
-echo Done building
-mv build/lede/bin images/
+make $DEBUG J=$CPUS T=$TARGET $1
+echo Done building $1
+
+#  mv build/lede/bin images/
