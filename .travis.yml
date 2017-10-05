@@ -11,5 +11,5 @@ env:
   global:
     - FORCE_UNSAFE_CONFIGURE=1
 script:
-   - travis_wait 30 ./build.sh
+   - ./build.sh
    - mv build/lede/bin images/
