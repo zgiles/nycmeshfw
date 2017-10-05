@@ -10,11 +10,6 @@ before_install:
 env:
   global:
     - FORCE_UNSAFE_CONFIGURE=1
-    - DEBUG="V=s"
 script:
-   - ./build.sh checkout
-   - ./build.sh sync_config
-   - ./build.sh pre_build
-   - ./build.sh compile
-   - ./build.sh post_build
+   - travis_wait 30 ./build.sh
    - mv build/lede/bin images/
