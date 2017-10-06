@@ -3,9 +3,15 @@ jobs:
   build:
     docker:
       - image: zgiles/nycmeshfw:nycmesh-4.0-docker
-        environment:
-          TARGET: "nsm5-xw"
+
+    environment:
+      TARGET: "nsm5-xw"
+
     steps:
       - checkout
-      - run: ./build.sh | tee stdout:
+
+      - run:
+          name: Build Image
+          command: ./build.sh
+          no_output_timeout: 60m
           timeout: 6000
