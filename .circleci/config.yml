@@ -2,10 +2,11 @@ version: 2
 jobs:
   build:
     docker:
-      - image: zgiles/nycmeshfw:nycmesh-4.0-docker
+            - image: ${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_BRANCH}
 
     environment:
       TARGET: "nsm5-xw"
+      CPUS: "2"
 
     steps:
       - checkout
