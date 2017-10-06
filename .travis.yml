@@ -5,4 +5,4 @@ services:
 before_install:
   - docker pull $TRAVIS_REPO_SLUG:$TRAVIS_BRANCH
 script:
-  - docker run -it -v "$(pwd)"/:/git $TRAVIS_REPO_SLUG:$TRAVIS_BRANCH /bin/sh -c "cd /git; ./build.sh"
+  - docker run -it --env DEBUG --env TARGET --env CPUS -v "$(pwd)"/:/git $TRAVIS_REPO_SLUG:$TRAVIS_BRANCH /bin/sh -c "cd /git; ./build.sh"
