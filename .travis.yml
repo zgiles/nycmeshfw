@@ -3,6 +3,6 @@ language: c
 services:
   - docker
 before_install:
-  - docker pull zgiles/nycmeshbuild-docker:$TRAVIS_BRANCH
+  - docker pull $TRAVIS_REPO_SLUG:$TRAVIS_BRANCH
 script:
   - docker run -it -v "$(pwd)"/:/git zgiles/nycmeshbuild-docker:latest /bin/sh -c "cd /git; ./build.sh"
