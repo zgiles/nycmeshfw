@@ -1,6 +1,9 @@
 #!/bin/bash
 set +x
 
+# Debug Travis
+while true; do df -h; sleep 10; done &
+
 # Because ./configure will sometimes check for root. tar is a good example
 export FORCE_UNSAFE_CONFIGURE=1
 
